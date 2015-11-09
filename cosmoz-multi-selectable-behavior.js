@@ -18,7 +18,6 @@ Cosmoz.MultiSelectableBehaviorImpl = {
 
 	selectItems: function (items) {
 		var selectable = this;
-
 		items.forEach(function (item) {
 			selectable.selectItem(item);
 		});
