@@ -10,7 +10,7 @@ Basically help functions for the selection and handling of items.
 
 ### Install
 
-`bower install --save cosmoz-selectable`
+`bower install --save Neovici/cosmoz-selectable`
 
 ### Add the cosmoz-selectable import
 ```html
