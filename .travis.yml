@@ -1,0 +1,21 @@
+language: node_js
+node_js: stable
+addons:
+  firefox: latest
+  apt:
+    sources:
+    - google-chrome
+    - ubuntu-toolchain-r-test
+    packages:
+    - google-chrome-stable
+    - g++-4.8
+before_script:
+- npm install -g bower web-component-tester
+- bower install
+script: xvfb-run wct
+env:
+  global:
+  - CXX=g++-4.8
+notifications:
+  slack:
+    secure: qHCwpXNhVFLOwB/yxijhGUgXveSTGsK4uvoF0D5ip71YFP0cZ/SP1LAAB9eXedTsX39JPSEWCPhpY+VBij2Ppr0nRjTz9eLGk80jI8foHDQXJU2iOHZnKqkMlzpzv5ihujjN3G9m3P6a03EIy51vGXkCW0cU8erGijt3wvRMIDxIEmzmGpjrHUHyXtLRi5T9cqyypifwMSsaUqRJlT5UqDdqhP4T+1NauzenaVAblNiHR/rHRiyErwgjC66AQkVLp0Oy1ANTQ3FVA1vBbVLGshzxmf6ySq7JxFOB8+c5Aldip0FnmCM3n/m3TlPGi1/BfHsAxioW/Rh4mRbLLiUQflRE++SenYf0S13moJ3LuD9RmwnxBvPceXUj9xZPr7eDX+g11fqrB+9/LX1rTzgzGlJsjStMT/r1cD8ZAGJIRpRvdRb+jtuokO/yNNyrqljswn3BbaZa+BsXexjBInsWcWpH7EpyOhmjqUk65VN5D3KbmcVbco60K6ESGOed0jb3AizZI3DI2gJlL5L8YN7ri3hUBP1pGz+SMBHvUPRJe/UYX1YRaRzeX366oGghsfWVn8sFyXHrQ9o9eKZBqELbYkYlR1PKj88dsAh7jpb1HEKjFiiFXPVVw73Vl3AmzXTeTH/1ij4tHt4+xhBwbtSynvzTMpI01HM/rN9ba5HfTAw=

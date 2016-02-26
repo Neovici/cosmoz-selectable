@@ -1,5 +1,7 @@
 # cosmoz-selectable
 
+[![Build Status](https://travis-ci.org/Neovici/cosmoz-selectable.svg?branch=master)](https://travis-ci.org/Neovici/cosmoz-selectable)
+
 cosmoz-selectable is a Polymer component which contains selectable behaviour and multiple selectable behaviour.
 Basically help functions for the selection and handling of items.
 
