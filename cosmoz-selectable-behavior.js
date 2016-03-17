@@ -37,7 +37,10 @@ Cosmoz.SelectableBehavior = {
 
 	selectByValue: function (value) {
 		var item = this._valueToItem(value);
-		this.selectItem(item);
+		if (item) {
+			this.selectItem(item);
+		}
+
 	},
 
 	_valueToItem: function (value) {
