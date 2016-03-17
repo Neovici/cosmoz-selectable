@@ -26,7 +26,9 @@ Cosmoz.MultiSelectableBehaviorImpl = {
 	selectItem: function (item) {
 		if (this.multiSelection) {
 			if (this.selectedItems) {
-				this.push('selectedItems', item);
+				if (this.selectedItems.indexOf(item) < 0) {
+					this.push('selectedItems', item);
+				}
 			} else {
 				this._setSelectedItems([item]);
 			}
