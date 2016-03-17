@@ -26,7 +26,7 @@ Cosmoz.MultiSelectableBehaviorImpl = {
 	selectItem: function (item) {
 		if (this.multiSelection) {
 			if (this.selectedItems) {
-				this.toggleSelected(item);
+				this.push('selectedItems', item);
 			} else {
 				this._setSelectedItems([item]);
 			}
@@ -35,6 +35,16 @@ Cosmoz.MultiSelectableBehaviorImpl = {
 			this._setSelectedItems([item]);
 		}
 	},
+
+	deselectItem: function (item) {
+		var
+			i = this.selectedItems ? this.selectedItems.indexOf(item) : -1,
+			selected = i >= 0;
+		if (selected) {
+			this.splice('selectedItems', i, 1);
+		}
+	},
+
 	emptySelection: function () {
 		if (this.selectedItems) {
 			this.splice('selectedItems', 0, this.selectedItems.length);
@@ -52,16 +62,6 @@ Cosmoz.MultiSelectableBehaviorImpl = {
 		}
 	},
 
-	toggleSelected: function (item) {
-		var
-			i = this.selectedItems.indexOf(item),
-			selected = i >= 0;
-		if (selected) {
-			this.splice('selectedItems', i, 1);
-		} else {
-			this.push('selectedItems', item);
-		}
-	}
 };
 
 /**
