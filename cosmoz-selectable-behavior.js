@@ -1,4 +1,4 @@
-/*global _, Cosmoz, document, Polymer, window */
+/*global Cosmoz, Polymer, window */
 "use strict";
 
 window.Cosmoz = window.Cosmoz || {};
