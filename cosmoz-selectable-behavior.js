@@ -14,11 +14,18 @@ Cosmoz.SelectableBehavior = {
 			notify: true
 		},
 		items: {
-			type: Array
+			type: Array,
+			observer: '_itemsChanged'
 		},
 		valueProperty: {
 			type: String,
 			value: 'label'
+		}
+	},
+
+	_itemsChanged: function (newItems) {
+		if (newItems.indexOf(this.selectedItem) === -1) {
+			this.emptySelection();
 		}
 	},
 

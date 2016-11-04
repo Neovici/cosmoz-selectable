@@ -20,10 +20,9 @@ Cosmoz.MultiSelectableBehaviorImpl = {
 	},
 
 	selectItems: function (items) {
-		var selectable = this;
 		items.forEach(function (item) {
-			selectable.selectItem(item);
-		});
+			this.selectItem(item);
+		}, this);
 	},
 
 	selectItem: function (item) {
@@ -42,11 +41,9 @@ Cosmoz.MultiSelectableBehaviorImpl = {
 	},
 
 	deselectItem: function (item) {
-		var
-			i = this.selectedItems ? this.selectedItems.indexOf(item) : -1,
-			selected = i >= 0;
-		if (selected) {
-			this.splice('selectedItems', i, 1);
+		var	selectedIndex = this.selectedItems ? this.selectedItems.indexOf(item) : -1;
+		if (selectedIndex !== -1) {
+			this.splice('selectedItems', selectedIndex, 1);
 		}
 	},
 
