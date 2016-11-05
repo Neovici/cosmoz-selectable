@@ -1,5 +1,5 @@
 /*global Cosmoz, Polymer, window */
-"use strict";
+'use strict';
 
 window.Cosmoz = window.Cosmoz || {};
 
@@ -8,14 +8,28 @@ window.Cosmoz = window.Cosmoz || {};
  */
 Cosmoz.SelectableBehavior = {
 	properties: {
+		/**
+		 * Currently selected item
+		 */
 		selectedItem: {
 			type: Object,
 			readOnly: true,
 			notify: true
 		},
+		/**
+		 * The list of selectable items
+		 */
 		items: {
 			type: Array,
 			observer: '_itemsChanged'
+		},
+		/**
+		 * Whether to maintain selection even when selectedItem
+		 * isn't in the list of items anymore.
+		 */
+		persistSelection: {
+			type: Boolean,
+			value: false
 		},
 		valueProperty: {
 			type: String,
@@ -24,7 +38,7 @@ Cosmoz.SelectableBehavior = {
 	},
 
 	_itemsChanged: function (newItems) {
-		if (newItems.indexOf(this.selectedItem) === -1) {
+		if (!this.persistSelection && newItems.indexOf(this.selectedItem) === -1) {
 			this.emptySelection();
 		}
 	},
@@ -51,21 +65,19 @@ Cosmoz.SelectableBehavior = {
 	},
 
 	_valueToItem: function (value) {
-		return (value === null)
+		return value === null
 			? null
 			: this.items[this._valueToIndex(value)];
 	},
 	_valueToIndex: function (value) {
-		var
-			ctx = this,
-			index;
+		var index;
 
 		this.items.some(function (item, i) {
-			if (ctx._valueForItem(item) === value) {
+			if (this._valueForItem(item) === value) {
 				index = i;
 				return true;
 			}
-		});
+		}, this);
 		return index;
 	},
 
