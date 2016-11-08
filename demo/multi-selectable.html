@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Cosmoz Selectable behavior demo</title>
+
+	<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../polymer/polymer.html">
+	<link rel="import" href="x-multi-selector.html">
+
+</head>
+<body>
+    <h2>Cosmoz multi selectable demo</h2>
+    <template id="t" is="dom-bind">
+        <h3>Items</h3>
+        <ul>
+            <template is="dom-repeat" items="[[data]]">
+                <li>[[item.id]]: [[item.text]]</li>
+            </template>
+        </ul>          
+
+        <button id="b1">set selected-values=[1,3]</button>
+        <button id="b2">set selected-values=[2,4]</button>
+        <button id="b3">select item with id 5</button>
+
+        <x-multi-selector
+            multi-selection 
+            items="[[data]]" 
+            selected-values="{{selectedValues}}"
+            selected-items="{{selectedItems}}" 
+            value-property="id"></x-multi-selector>
+
+        <h3>Selected values</h3>
+        <ul>
+            <template is="dom-repeat" items="[[selectedValues]]">
+                <li>[[item]]</li>
+            </template>
+        </ul>
+        <h3>Selected items</h3>
+        <ul>
+            <template is="dom-repeat" items="[[selectedItems]]">
+                <li>[[item.id]]: [[item.text]]</li>
+            </template>
+        </ul>            
+    </template>
+
+    <script>
+        var 
+            t = document.querySelector('#t');
+
+        t.addEventListener('dom-change', function() {
+            var
+                b1 = document.querySelector('#b1'),
+                b2 = document.querySelector('#b2'),
+                b3 = document.querySelector('#b3'),
+                selector = document.querySelector('x-multi-selector'),
+                data;
+
+            b1.addEventListener('click', function () {
+                t.selectedValues = [1, 3];
+            });
+
+            b2.addEventListener('click', function () {
+                t.selectedValues = [2, 4];
+            });
+
+            b3.addEventListener('click', function () {
+                selector.selectItem(data[4]);
+            });
+
+            data = [
+                {
+                    id: 1,
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                },
+                {
+                    id: 2,
+                    text: 'Praesent mollis augue eget lacus interdum dapibus.'
+                },
+                {
+                    id: 3,
+                    text: 'Donec finibus enim non ligula porttitor ullamcorper.'
+                },
+                {
+                    id: 4,
+                    text: 'Vestibulum accumsan leo nec sapien facilisis placerat.'
+                },
+                {
+                    id: 5,
+                    text: 'Maecenas et nunc eu sapien blandit lacinia sit amet ac lacus.'
+                },
+
+
+            ];
+
+            t.data = data;
+            t.selectedValues = [1];
+        });
+	</script>
+</body>
+</html>

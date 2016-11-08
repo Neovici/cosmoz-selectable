@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Cosmoz Selectable behavior demo</title>
+
+	<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../polymer/polymer.html">
+	<link rel="import" href="x-single-selector.html">
+
+</head>
+<body>
+    <h2>Cosmoz selectable demo</h2>
+    <template id="t" is="dom-bind">
+        <h3>Items</h3>
+        <ul>
+            <template is="dom-repeat" items="[[data]]">
+                <li>[[item.id]]: [[item.text]]</li>
+            </template>
+        </ul>          
+
+        <button id="b1">set selected=1</button>
+        <button id="b2">set selected=2</button>
+        <button id="b3">select item with id 5</button>
+
+        <x-single-selector
+            items="[[data]]" 
+            selected="{{selected}}"
+            selected-item="{{selectedItem}}" 
+            value-property="id"></x-single-selector>
+
+        <p>Selected = [[selected]]</p>
+        <p>Selected item = {{selectedItem.id}}: {{selectedItem.text}}
+    </template>
+
+    <script>
+        var 
+            t = document.querySelector('#t');
+
+        t.addEventListener('dom-change', function() {
+            var
+                b1 = document.querySelector('#b1'),
+                b2 = document.querySelector('#b2'),
+                b3 = document.querySelector('#b3'),
+                selector = document.querySelector('x-single-selector'),
+                data;
+
+            b1.addEventListener('click', function () {
+                t.selected = 1;
+            });
+
+            b2.addEventListener('click', function () {
+                t.selected = 2;
+            });
+
+            b3.addEventListener('click', function () {
+                selector.selectItem(data[4]);
+            });
+
+            data = [
+                {
+                    id: 1,
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                },
+                {
+                    id: 2,
+                    text: 'Praesent mollis augue eget lacus interdum dapibus.'
+                },
+                {
+                    id: 3,
+                    text: 'Donec finibus enim non ligula porttitor ullamcorper.'
+                },
+                {
+                    id: 4,
+                    text: 'Vestibulum accumsan leo nec sapien facilisis placerat.'
+                },
+                {
+                    id: 5,
+                    text: 'Maecenas et nunc eu sapien blandit lacinia sit amet ac lacus.'
+                },
+
+
+            ];
+
+            t.data = data;
+        });
+	</script>
+</body>
+</html>
