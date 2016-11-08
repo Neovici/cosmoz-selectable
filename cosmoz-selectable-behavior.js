@@ -41,6 +41,7 @@ Cosmoz.SelectableBehavior = {
 		if (!this.persistSelection && newItems.indexOf(this.selectedItem) === -1) {
 			this.emptySelection();
 		}
+		this.fire('items-changed', { items: this.items});
 	},
 
 	selectItem: function (item) {
