@@ -16,6 +16,7 @@ Cosmoz.SelectableBehavior = {
 			readOnly: true,
 			notify: true
 		},
+
 		/**
 		 * The list of selectable items
 		 */
@@ -23,6 +24,7 @@ Cosmoz.SelectableBehavior = {
 			type: Array,
 			observer: '_itemsChanged'
 		},
+
 		/**
 		 * Whether to maintain selection even when selectedItem
 		 * isn't in the list of items anymore.
@@ -31,24 +33,55 @@ Cosmoz.SelectableBehavior = {
 			type: Boolean,
 			value: false
 		},
+
 		valueProperty: {
 			type: String,
 			value: 'label'
+		},
+
+		/**
+		 */
+		selected: {
+			type: Object,
+			notify: true
+		}
+	},
+
+	observers: [
+		'_selectedChanged(selected)'
+	],
+
+	_selectedChanged: function (selected) {
+		this._updateSelected(selected);
+	},
+
+	_updateSelected: function (selected) {
+		if (this.items && !this._doNotUpdateSelectedItem) {
+			this.selectByValue(selected);
 		}
 	},
 
 	_itemsChanged: function (newItems) {
 		if (!this.persistSelection && newItems.indexOf(this.selectedItem) === -1) {
+			var prevSelected = this.selected;
 			this.emptySelection();
+
+			// selected might have been bound before items
+			if (prevSelected) {
+				this.selected = prevSelected;
+			}
 		}
 	},
 
 	selectItem: function (item) {
 		this._setSelectedItem(item);
+		this._doNotUpdateSelectedItem = true;
+		this.selected = item ? this._valueForItem(item) : null;
+		this._doNotUpdateSelectedItem = false;
 	},
 
-	emptySelection: function (item) {
-		this._setSelectedItem(null);
+	emptySelection: function () {
+		this.selectItem(null);
 	},
 
 	selectByIndex: function (itemIndex) {
@@ -69,6 +102,7 @@ Cosmoz.SelectableBehavior = {
 			? null
 			: this.items[this._valueToIndex(value)];
 	},
+
 	_valueToIndex: function (value) {
 		var index;
 
