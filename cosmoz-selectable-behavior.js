@@ -21,8 +21,10 @@ Cosmoz.SelectableBehavior = {
 		 */
 		items: {
 			type: Array,
-			observer: '_itemsChanged'
+			observer: '_itemsChanged',
+			notify: true
 		},
+
 		/**
 		 * Whether to maintain selection even when selectedItem
 		 * isn't in the list of items anymore.
@@ -31,6 +33,7 @@ Cosmoz.SelectableBehavior = {
 			type: Boolean,
 			value: false
 		},
+
 		valueProperty: {
 			type: String,
 			value: 'label'
@@ -44,7 +47,6 @@ Cosmoz.SelectableBehavior = {
 		if (!this.persistSelection && newItems.indexOf(this.selectedItem) === -1) {
 			this.emptySelection();
 		}
-		this.fire('items-changed', { items: this.items});
 	},
 
 	selectItem: function (item) {
