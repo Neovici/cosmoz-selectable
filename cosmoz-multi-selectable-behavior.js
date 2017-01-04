@@ -14,7 +14,6 @@ Cosmoz.MultiSelectableBehaviorImpl = {
 		},
 		selectedItems: {
 			type: Array,
-			readOnly: true,
 			notify: true
 		}
 	},
@@ -32,11 +31,11 @@ Cosmoz.MultiSelectableBehaviorImpl = {
 					this.push('selectedItems', item);
 				}
 			} else {
-				this._setSelectedItems([item]);
+				this.selectedItems = [item];
 			}
 		} else {
 			this._setSelectedItem(item);
-			this._setSelectedItems([item]);
+			this.selectedItems = [item];
 		}
 	},
 
