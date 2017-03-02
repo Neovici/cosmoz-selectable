@@ -34,7 +34,7 @@ Cosmoz.MultiSelectableBehaviorImpl = {
 				this.selectedItems = [item];
 			}
 		} else {
-			this._setSelectedItem(item);
+			this.selectedItem = item;
 			this.selectedItems = [item];
 		}
 	},
@@ -52,7 +52,7 @@ Cosmoz.MultiSelectableBehaviorImpl = {
 			//this.set('selectedItems', []);
 		}
 		if (!this.multiSelection) {
-			this._setSelectedItem(null);
+			this.selectedItem = null;
 		}
 
 	},

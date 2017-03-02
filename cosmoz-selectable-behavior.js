@@ -13,7 +13,6 @@ Cosmoz.SelectableBehavior = {
 		 */
 		selectedItem: {
 			type: Object,
-			readOnly: true,
 			notify: true
 		},
 		/**
@@ -50,11 +49,11 @@ Cosmoz.SelectableBehavior = {
 	},
 
 	selectItem: function (item) {
-		this._setSelectedItem(item);
+		this.selectedItem = item;
 	},
 
 	emptySelection: function (item) {
-		this._setSelectedItem(null);
+		this.selectedItem = null;
 	},
 
 	selectByIndex: function (itemIndex) {
