@@ -1,5 +1,5 @@
-/*global Cosmoz, Polymer, window */
-"use strict";
+
+'use strict';
 
 window.Cosmoz = window.Cosmoz || {};
 
