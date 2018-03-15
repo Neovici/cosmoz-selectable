@@ -1,7 +1,7 @@
 {
 	"name": "cosmoz-selectable",
 	"main": "cosmoz-multi-selectable-behavior.html",
-	"version": "0.0.1",
+	"version": "1.0.1",
 	"homepage": "https://github.com/Neovici/cosmoz-selectable",
 	"authors": [
 		"Neovici Development"
